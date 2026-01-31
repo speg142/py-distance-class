@@ -1,46 +1,49 @@
+from __future__ import annotations
+
+
 class Distance:
     def __init__(self, km: float) -> None:
         self.km = km
 
-    def __str__(self) -> None:
+    def __str__(self) -> str:
         return f"Distance: {self.km} kilometers."
 
-    def __repr__(self) -> None:
+    def __repr__(self) -> str:
         return f"Distance(km={self.km})"
 
-    def _get_km(self, other: None) -> None:
+    def _get_km(self, other: int) -> int :
         if isinstance(other, Distance):
             return other.km
         return other
 
-    def __add__(self, other: None) -> None:
+    def __add__(self, other: int) -> Distance:
         return Distance(self.km + self._get_km(other))
 
-    def __iadd__(self, other: None) -> None:
+    def __iadd__(self, other: int) -> Distance:
         self.km += self._get_km(other)
         return self
 
-    def __mul__(self, other: None) -> None:
+    def __mul__(self, other: int) -> Distance:
         if isinstance(other, Distance):
             raise TypeError
         return Distance(self.km * other)
 
-    def __truediv__(self, other: None) -> None:
+    def __truediv__(self, other: int) -> Distance:
         if isinstance(other, Distance):
             raise TypeError
         return Distance(round(self.km / other, 2))
 
-    def __lt__(self, other: None) -> None:
+    def __lt__(self, other: Distance) -> Distance:
         return self.km < self._get_km(other)
 
-    def __gt__(self, other: None) -> None:
+    def __gt__(self, other: Distance) -> Distance:
         return self.km > self._get_km(other)
 
-    def __eq__(self, other: None) -> None:
+    def __eq__(self, other: Distance) -> Distance:
         return self.km == self._get_km(other)
 
-    def __le__(self, other: None) -> None:
+    def __le__(self, other: Distance) -> Distance:
         return self.km <= self._get_km(other)
 
-    def __ge__(self, other: None) -> None:
+    def __ge__(self, other: Distance) -> Distance:
         return self.km >= self._get_km(other)
